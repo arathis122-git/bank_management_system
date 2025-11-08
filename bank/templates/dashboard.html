@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<p>Welcome, {{ request.user.get_full_name }}!</p>
+
+<h3>Your Accounts</h3>
+<ul>
+{% for acct in accounts %}
+  <li>{{ acct.account_number }} ({{ acct.get_account_type_display }}) — Balance: {{ acct.balance }}</li>
+{% empty %}
+  <li>No accounts</li>
+{% endfor %}
+</ul>
+
+<nav>
+  <a href="{% url 'bank:deposit' %}">Deposit</a> |
+  <a href="{% url 'bank:withdraw' %}">Withdraw</a> |
+  <a href="{% url 'bank:transfer' %}">Transfer</a> |
+  <a href="{% url 'bank:transactions' %}">Transactions</a>
+</nav>
+{% endblock %}
